@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="App, Loiciel, web, Application web, message, discusssion">
+    <meta name="Description" content="Application Web">
+    <title>Chat en temps réel</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            max-width: 800px;
+            min-width: 280px;
+            font-size: 100%;
+            overflow-y: auto;
+            height: 100vh;
+        }
+
+        h1 {
+            font-weight: bold;
+            font-size: 40px;
+            font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            margin-bottom: 8px;
+        }
+
+        #logoApp {
+            width: 100px;
+            height: 100px;
+            padding: 8px;
+            border-radius: 100%;
+            border: 5px;
+            background-image: linear-gradient(rgb(92, 108, 133), rgb(148, 49, 10), rgb(11, 58, 112));
+            animation: colorStory 5s linear infinite;
+
+        }
+
+        .hr,
+        .hrM {
+            width: 100%;
+            height: 1px;
+            background-color: rgb(199, 199, 199);
+        }
+
+        .no {
+            display: none;
+        }
+
+        #amovibleAreatext {
+            position: fixed;
+            top: 83%;
+            left: 75%;
+        }
+
+        #amovibleAreatextOff {
+            position: fixed;
+            top: 56.5%;
+            left: 85%;
+        }
+
+        .hrM {
+            width: 85%;
+            margin-left: 15%;
+            margin-top: 5px;
+            margin-bottom: 5px;
+
+        }
+
+        header {
+            padding: 10px;
+            border-bottom: 2px gray;
+            font-size: 130%;
+        }
+
+        aside {
+            position: fixed;
+            background-color: rgb(198, 226, 43);
+            width: 100%;
+            height: 40vh;
+            padding: 70px;
+            top: 30%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        #userForm {
+            position: fixed;
+            height: 20vh;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        article {
+            position: fixed;
+            top: 60%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .input {
+            font-size: 170%;
+        }
+
+        #messageInput {
+            font-size: 150%;
+            min-height: 10px;
+            max-height: 20vh;
+
+        }
+
+        main {
+            padding: 10px;
+        }
+
+        #Userssearch {
+            background-color: rgb(226, 226, 226);
+            color: rgb(59, 59, 59);
+            border-radius: 5px;
+            padding: 3px;
+            font-size: 100%;
+            font-weight: 100;
+            width: 250px;
+            border: none;
+        }
+
+        #Userssearch:focus {
+            width: 75%;
+            border: none;
+        }
+
+        .notif {
+            font-size: 100%;
+            padding: 5px;
+            background-color: rgb(167, 167, 167);
+            color: antiquewhite;
+        }
+
+        .userPersonnal {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            font-size: 150%;
+            margin-bottom: 3px;
+        }
+
+        .imgUser {
+            width: 50px;
+            height: 50px;
+            padding: 6px;
+            border-radius: 100%;
+            border: 5px;
+            background-image: linear-gradient(rgb(92, 108, 133), rgb(148, 49, 10), rgb(11, 58, 112));
+            animation: colorStory 1.5s linear infinite;
+
+        }
+
+        @keyframes colorStory {
+            0% {
+                background-image: linear-gradient(rgb(92, 108, 133), rgb(148, 49, 10), rgb(11, 58, 112));
+                translate: 2s;
+            }
+
+            20% {
+                background-image: linear-gradient(rgb(19, 53, 107), rgb(129, 113, 106), rgb(11, 112, 11));
+                translate: 2s;
+            }
+
+            60% {
+                background-image: linear-gradient(rgb(70, 73, 78), rgb(218, 114, 73), rgb(123, 156, 194));
+                translate: 2s;
+            }
+
+            80% {
+                background-image: linear-gradient(rgb(106, 138, 20), rgb(102, 61, 45), rgb(112, 11, 61));
+                translate: 2s;
+            }
+        }
+
+        #Conversation {
+            position: fixed;
+            background-color: rgb(92, 108, 133);
+            top: 55%;
+            width: 100%;
+            height: 70vh;
+            padding: 10px;
+        }
+
+        #messageForm {
+            top: 50%;
+            left: 50%;
+            transform: translate(2%, 20%);
+        }
+    </style>
+
+</head>
+
+<body>
+    <header>
+        <h1>Discussions</h1>
+        <div s style="display: flex;">
+            <input type="search" name="Userssearch" id="Userssearch" placeholder="  Recherche..."> <span
+                class="input-icon"><i class="fas fa-search"></i></span>
+            <div class="icon" style="margin-left:10%"><i class="fas fa-inbox"></i></div>
+        </div>
+        <br>
+        <div class="icon"><i class="fas fa-archive"></i> Archive</div>
+    </header>
+    <aside id="aside">
+        <form id="userForm">
+            <input type="text" placeholder=" Entrer your Username" id="myUsername" class="input" required><br>
+            <input type="text" placeholder=" Entrer your Password" class="input" required minlength="8"><br>
+            <input type="submit" class="input" style="padding: 3px;" value="Connexion"><br>
+
+        </form>
+
+
+    </aside>
+
+    <main>
+        <div class="hr"></div><br>
+
+        <div id="userList">
+            <div class="notif">Les conversations et les utilisateurs en ligne s'afficheront ci-bas</div>
+            <br>
+            <ul id="users">
+                <li>
+                    <div class="userPersonnal"><img src="inconnu.jpg" alt="profil user"
+                            class="imgUser"><span>UserName</span></div>
+                </li>
+
+                <div class="hrM"></div>
+
+                <li>
+                    <div class="userPersonnal"><img src="inconnu.jpg" alt="profil user"
+                            class="imgUser"><span>UserName</span></div>
+                </li>
+
+                <div class="hrM"></div>
+
+                <li>
+                    <div class="userPersonnal"><img src="inconnu.jpg" alt="profil user"
+                            class="imgUser"><span>UserName</span></div>
+                </li>
+
+                <div class="hrM"></div>
+
+                <li>
+                    <div class="userPersonnal"><img src="inconnu.jpg" alt="profil user"
+                            class="imgUser"><span>UserName</span></div>
+                </li>
+
+                <div class="hrM"></div>
+
+                <li>
+                    <div class="userPersonnal"><img src="inconnu.jpg" alt="profil user"
+                            class="imgUser"><span>UserName</span></div>
+                </li>
+
+                <div class="hrM"></div>
+                <li>
+                    <div class="userPersonnal"><img src="inconnu.jpg" alt="profil user"
+                            class="imgUser"><span>UserName</span></div>
+                </li>
+
+                <div class="hrM"></div>
+
+                <li>
+                    <div class="userPersonnal"><img src="inconnu.jpg" alt="profil user"
+                            class="imgUser"><span>UserName</span></div>
+                </li>
+
+                <div class="hrM"></div>
+                <li>
+                    <div class="userPersonnal"><img src="inconnu.jpg" alt="profil user"
+                            class="imgUser"><span>UserName</span></div>
+                </li>
+
+                <div class="hrM"></div>
+                <li>
+                    <div class="userPersonnal"><img src="inconnu.jpg" alt="profil user"
+                            class="imgUser"><span>UserName</span></div>
+                </li>
+
+                <div class="hrM"></div>
+                <li>
+                    <div class="userPersonnal"><img src="inconnu.jpg" alt="profil user"
+                            class="imgUser"><span>UserName</span></div>
+                </li>
+
+                <div class="hrM"></div>
+
+            </ul>
+            <br><br><br><br><br><br><br>
+        </div>
+        <br><br><br><br><br><br><br><br><br><br>
+    </main>
+
+    <div id="Conversation">
+        <div id="chat">
+            <ul id="messages"></ul>
+
+            <form id="messageForm" action="" class="no">
+                <input id="destinationName" class="input" type="text" placeholder=" Nom de votre destinateur" required style="font-size: 150%;">
+                <input id="messageInput" type="text" placeholder=" Écrivez un message" ></input>
+                <input type="submit" id="sendButton" class="input" style="padding: 5px;" value="Envoyer">
+            </form>
+
+        </div>
+    </div>
+
+    <article>
+        <img src="logoApp.jpg" alt="" id="logoApp">
+    </article>
+
+    <div id="amovibleAreatext" class="no"><img src="amovibleAreatext2.png" alt="" style="width: 70px;"></div>
+    <div id="amovibleAreatextOff" class="no"><img src="amovibleAreatextOff.png" alt="" style="width: 50px;"></div>
+    <footer>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+        <script src="client.js"></script>
+    </footer>
+</body>
+
+</html>
